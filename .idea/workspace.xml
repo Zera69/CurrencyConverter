@@ -56,6 +56,9 @@
   "associatedIndex": 3
 }]]></component>
   <component name="ProjectId" id="3A2acd1U2jgQ03cKuUAT9z0C9nu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,7 +71,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "RefactorizarMonedas",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>

@@ -77,3 +77,4 @@ Do whatever you want with this code. Sell it, burn it, print it and use it as to
 ---
 
 **PS:** If this app actually helps you, buy me a pizza or something pls, im hungry
+By: Zera69

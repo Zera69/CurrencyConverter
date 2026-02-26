@@ -7,4 +7,6 @@ data class Moneda(
     val tipo: String,           //"Alta", "Media", "Baja"
     val valorEnSp: Double,      // 8.0, 0.8, 0.016
     val notas: String           //"Oro impuro con plomo."
+
+
 )

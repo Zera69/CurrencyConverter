@@ -1,6 +1,6 @@
 package com.example.currencyconverter.datos
 
-// Colección de todas las monedas posibles
+// Colección de todas las monedas posiblesx
 object CatalogoMonedas {
     val todasLasMonedas = listOf(
         // Būrach

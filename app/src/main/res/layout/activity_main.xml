@@ -110,6 +110,6 @@
         android:gravity="center"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-light"
-        android:italic="true"/>
+        android:textStyle="italic"/>
 
 </LinearLayout>

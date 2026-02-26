@@ -14,23 +14,22 @@ import com.example.currencyconverter.datos.Moneda
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editCantidad: EditText      // Donde el usuario escribe el número
-    private lateinit var spinnerOrigen: Spinner      // Lista desplegable de moneda origen
-    private lateinit var spinnerDestino: Spinner     // Lista desplegable de moneda destino
-    private lateinit var btnConvertir: Button         // Botón mágico
-    private lateinit var textResultado: TextView      // Donde mostraremos el resultado
+    private lateinit var editCantidad: EditText
+    private lateinit var spinnerOrigen: Spinner
+    private lateinit var spinnerDestino: Spinner
+    private lateinit var btnConvertir: Button
+    private lateinit var textResultado: TextView
 
-    // Usamos "?" porque al principio pueden ser null (el usuario aún no ha seleccionado nada)
+    // usamos "?" porque al principio pueden ser null (el usuario aún no ha seleccionado nada)
     private var monedaOrigen: Moneda? = null
     private var monedaDestino: Moneda? = null
 
 
-    // Este es el punto de entrada de la actividad
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)  // Enlazamos con el XML que creamos
+        setContentView(R.layout.activity_main)  // le indicamos que este es el xml
 
-        // "findViewById" busca en el XML el elemento con ese ID y lo asigna a nuestra variable
+        // "findViewById" busca en el XML con ese ID y lo asigna
         editCantidad = findViewById(R.id.editCantidadOrigen)
         spinnerOrigen = findViewById(R.id.spinnerOrigen)
         spinnerDestino = findViewById(R.id.spinnerDestino)
@@ -39,35 +38,30 @@ class MainActivity : AppCompatActivity() {
 
         configurarSpinners()
 
-        // setOnClickListener es como decir: "Cuando hagan click aquí, haz esto"
+        // fam, está esperando a que hagas click para hacer algo
         btnConvertir.setOnClickListener {
-            realizarConversion()  // Llama a la función que hace la magia
+            realizarConversion()
         }
     }
 
-    // Esta función prepara los dos spinners para mostrar nuestras monedas
     private fun configurarSpinners() {
 
         val nombresMonedas = CatalogoMonedas.todasLasMonedas.map { moneda ->
             "${moneda.nombre} (${moneda.nacion} - ${moneda.tipo})"
         }
 
-        // El adaptador es el puente entre nuestros DATOS (lista de nombres) y el SPINNER
-        // android.R.layout.simple_spinner_item es un diseño que ya viene con Android
         val adaptador = ArrayAdapter(
             this,                                   // Contexto (la actividad actual)
-            android.R.layout.simple_spinner_item,   // Cómo se ve cada elemento cerrado
+            android.R.layout.simple_spinner_item,   // Como se ve cada elemento cerrado
             nombresMonedas                           // La lista de datos a mostrar
         )
 
-        // Cómo se ve la lista cuando está desplegada
+        // Como se ve la lista cuando está desplegada
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // --- 3.3 Asignar el adaptador a los spinners ---
         spinnerOrigen.adapter = adaptador
         spinnerDestino.adapter = adaptador
 
-        // ORIGEN: Cuando el usuario selecciona una moneda de origen
         spinnerOrigen.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?,
                                         view: View?,
@@ -78,11 +72,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // No pasa nada si no selecciona nada (pero no debería ocurrir)
+                // No pasa nada si no selecciona nada
             }
         }
 
-        // DESTINO: Cuando el usuario selecciona una moneda de destino
         spinnerDestino.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?,
                                         view: View?,
@@ -97,39 +90,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Para que no estén vacíos al iniciar la app
-        spinnerOrigen.setSelection(0)   // Selecciona la primera moneda (Corona)
-        spinnerDestino.setSelection(0)  // También la primera
+        spinnerOrigen.setSelection(0)
+        spinnerDestino.setSelection(0)
 
         // Inicializamos nuestras variables con esas selecciones por defecto
         monedaOrigen = CatalogoMonedas.todasLasMonedas[0]
         monedaDestino = CatalogoMonedas.todasLasMonedas[0]
     }
-
-
-    // Esta función se ejecuta cuando el usuario pulsa el botón
     private fun realizarConversion() {
 
-        // --- 4.1 Obtener la cantidad que el usuario escribió ---
         val cantidadTexto = editCantidad.text.toString()
 
-        // ¿El usuario no escribió nada?
         if (cantidadTexto.isEmpty()) {
             textResultado.text = "Escribe una cantidad"
-            return  // Salimos de la función aquí
+            return
         }
 
 
         try {
             val cantidad = cantidadTexto.toDouble()  // Puede lanzar excepción si no es número
 
-            // --- 4.3 Verificar que hay monedas seleccionadas ---
             if (monedaOrigen == null || monedaDestino == null) {
-                textResultado.text = " Error interno: monedas no seleccionadas"
+                textResultado.text = " Error: monedas no seleccionadas"
                 return
             }
 
-            // Usamos "!!" porque ya comprobamos que no son null
-            // Convertimos la cantidad de origen a sp (plata universal)
+            // Usamos "!!" porque no puede ser null o caca
+            // Convertimos la cantidad de origen a sp
             val cantidadEnSp = cantidad * monedaOrigen!!.valorEnSp
 
             // Convertimos de sp a la moneda destino

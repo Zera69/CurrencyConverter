@@ -1,4 +1,4 @@
-# 🎲 D&D Currency Converter - Because Math is for Casters and i am not
+# D&D Currency Converter - Because Math is for Casters 
 
 Yo. This is a shitty but functional currency converter with kotlin cause my Dm wanted one and i can use it as a project for my studies ;)
 

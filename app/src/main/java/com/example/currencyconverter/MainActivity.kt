@@ -122,15 +122,9 @@ class MainActivity : AppCompatActivity() {
             // Convertimos de sp a la moneda destino
             val cantidadDestino = cantidadEnSp / monedaDestino!!.valorEnSp
 
-            // String.format permite crear textos con números formateados
-            // "%.2f" significa "número con 2 decimales"
-            textResultado.text = String.format(
-                "%.2f %s = %.2f %s",
-                cantidad,                     // Ej: 5.00
-                monedaOrigen!!.nombre,         // Ej: Corona
-                cantidadDestino,               // Ej: 40.00
-                monedaDestino!!.nombre         // Ej: Serafín
-            )
+            // "%.2f" significa "número con 2 decimales
+            val texto = "${String.format("%.2f", cantidad)} ${monedaOrigen?.nombre} = ${String.format("%.2f", cantidadDestino)} ${monedaDestino?.nombre}"
+            textResultado.text = texto
 
         } catch (e: NumberFormatException) {
             // Si el usuario escribió algo que no es un número (ej: "hola")

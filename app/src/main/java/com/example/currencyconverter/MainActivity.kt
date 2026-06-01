@@ -8,9 +8,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.currencyconverter.datos.CatalogoMonedas
 import com.example.currencyconverter.datos.Moneda
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +40,28 @@ class MainActivity : AppCompatActivity() {
         textResultado = findViewById(R.id.textResultado)
 
         configurarSpinners()
+
+        val btnIrAPersonajes = findViewById<Button>(R.id.btnIrAPersonajes)
+        btnIrAPersonajes.setOnClickListener {
+            // Confirmamos el click con un Toast y un log para diagnóstico
+            Toast.makeText(this, "Abriendo Creador de Personajes...", Toast.LENGTH_SHORT).show()
+            Log.d("MainActivity", "btnIrAPersonajes clicked - attempting to start PersonajeActivity")
+
+            // Intent protegido: si hay un fallo al iniciar la actividad, lo mostramos
+            try {
+                val intent = Intent(this, PersonajeActivity::class.java)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error starting PersonajeActivity", e)
+                // Mostramos un diálogo con el error para que el usuario sepa qué ha fallado
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Error al abrir Personajes")
+                    .setMessage("Se ha producido una excepción: ${e::class.java.name}\n\n${e.message}")
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        }
+
 
         // fam, está esperando a que hagas click para hacer algo
         btnConvertir.setOnClickListener {

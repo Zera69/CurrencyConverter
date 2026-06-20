@@ -15,6 +15,8 @@ import com.example.currencyconverter.datos.CatalogoMonedas
 import com.example.currencyconverter.datos.Moneda
 import android.content.Intent
 
+//comentario pedorro 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var editCantidad: EditText

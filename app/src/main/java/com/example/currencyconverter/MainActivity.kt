@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.currencyconverter.datos.CatalogoMonedas
 import com.example.currencyconverter.datos.Moneda
 import android.content.Intent
-
+//este es otro comentario
 class MainActivity : AppCompatActivity() {
 
     private lateinit var editCantidad: EditText

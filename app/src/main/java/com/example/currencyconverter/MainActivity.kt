@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private var monedaOrigen: Moneda? = null
     private var monedaDestino: Moneda? = null
 
-
+    //ola esto es un comentario para cornelles
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)  // le indicamos que este es el xml
